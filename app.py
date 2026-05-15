@@ -1,9 +1,19 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from database import get_connection, init_db
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="static",
+    template_folder="templates"
+)
+
 CORS(app)
+
+@app.route("/")
+def serve_react():
+
+    return render_template("index.html")
 
 # HOME ROUTE
 @app.route("/")
